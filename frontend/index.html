@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PCOS Explainable Diagnosis</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-content">
+      <h1>PCOS Explainable AI Diagnosis</h1>
+      <p>Unified clinical + imaging diagnosis with lightweight multimodal fusion, transparent explainability, and clinician-friendly reporting.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="panel login-panel" id="loginSection">
+      <div class="login-grid">
+        <div class="login-copy">
+          <h2>Login</h2>
+          <p>Sign in as a Doctor or Patient to access the PCOS diagnosis workspace.</p>
+          <div class="login-chips">
+            <span>Doctor</span>
+            <span>Patient</span>
+            <span>Explainable AI</span>
+          </div>
+        </div>
+
+        <div class="login-visual">
+          <div class="illustration-card">
+            <div class="illustration-scene">
+              <div class="floating-badge">PCOS</div>
+              <div class="avatar doctor-avatar">
+                <div class="avatar-face"></div>
+                <div class="avatar-body"></div>
+                <div class="avatar-hat"></div>
+              </div>
+              <div class="avatar patient-avatar">
+                <div class="avatar-face"></div>
+                <div class="avatar-body"></div>
+              </div>
+              <div class="data-board">
+                <div class="board-line short"></div>
+                <div class="board-line medium"></div>
+                <div class="board-line short"></div>
+              </div>
+            </div>
+            <p class="illustration-caption">Patient-centered diagnosis with lightweight multimodal fusion.</p>
+          </div>
+        </div>
+      </div>
+
+      <form id="loginForm">
+        <div class="field-grid">
+          <div class="field-group">
+            <label for="userType">User Type</label>
+            <select id="userType" name="userType" required>
+              <option value="">Select role</option>
+              <option value="Doctor">Doctor</option>
+              <option value="Patient">Patient</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Enter your name" required />
+          </div>
+        </div>
+
+        <div class="field-grid">
+          <div class="field-group full-width">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required />
+          </div>
+        </div>
+
+        <div class="field-grid">
+          <div class="field-group full-width">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter a password" required />
+          </div>
+        </div>
+
+        <div class="field-grid hidden" id="confirmPasswordRow">
+          <div class="field-group full-width">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" />
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button class="primary-button" type="submit" id="submitButton">Sign In</button>
+          <p class="mode-switch" id="toggleMode">Don't have an account? Register</p>
+        </div>
+      </form>
+    </section>
+
+    <div id="appContent" class="hidden">
+      <div class="user-banner hidden" id="userBanner">
+        <div>
+          <p class="small-label">Signed in as</p>
+          <h2 id="userGreeting">-</h2>
+        </div>
+        <div class="banner-actions">
+          <span class="role-chip">
+            <span id="userRoleText">-</span>
+          </span>
+          <button class="secondary-button logout-button" id="logoutButton" type="button">Logout</button>
+        </div>
+      </div>
+
+      <section class="panel input-panel">
+        <h2>Patient Data Input</h2>
+        <p>Upload ovarian ultrasound imagery and submit clinical features for multimodal analysis.</p>
+
+        <form id="diagnosisForm">
+          <div class="field-grid">
+            <div class="field-group">
+              <label for="age">Age</label>
+              <input type="number" id="age" name="age" min="10" max="70" required />
+            </div>
+            <div class="field-group">
+              <label for="bmi">BMI</label>
+              <input type="number" id="bmi" name="bmi" step="0.1" min="10" max="50" required />
+            </div>
+          </div>
+
+          <div class="field-grid">
+            <div class="field-group">
+              <label for="cycleLength">Menstrual Cycle Length (days)</label>
+              <input type="number" id="cycleLength" name="cycleLength" min="10" max="90" required />
+            </div>
+            <div class="field-group">
+              <label for="hirsutism">Hirsutism Score</label>
+              <input type="number" id="hirsutism" name="hirsutism" min="0" max="36" required />
+            </div>
+          </div>
+
+          <div class="field-grid">
+            <div class="field-group">
+              <label for="insulinResistance">Insulin Resistance Score</label>
+              <input type="number" id="insulinResistance" name="insulinResistance" min="0" max="10" required />
+            </div>
+            <div class="field-group">
+              <label for="lhFsh">LH/FSH Ratio</label>
+              <input type="number" id="lhFsh" name="lhFsh" step="0.1" min="0" max="10" required />
+            </div>
+          </div>
+
+          <div class="field-grid">
+            <div class="field-group full-width">
+              <label for="ultrasoundCount">Ultrasound Follicles Count</label>
+              <input type="number" id="ultrasoundCount" name="ultrasoundCount" min="0" max="50" required />
+            </div>
+          </div>
+
+          <div class="upload-card">
+            <label for="imageUpload" class="upload-label">Upload Ultrasound Image</label>
+            <input type="file" id="imageUpload" name="imageUpload" accept="image/*" required />
+            <div class="image-preview" id="imagePreview">No image selected</div>
+          </div>
+
+          <button class="primary-button" type="submit">Run Diagnosis</button>
+        </form>
+      </section>
+
+      <section class="panel results-panel hidden" id="resultsSection">
+        <div class="panel-header">
+          <h2>Diagnosis Summary</h2>
+          <span class="status-badge" id="diagnosisStatus">Pending</span>
+        </div>
+
+        <div class="summary-grid">
+          <div class="summary-card">
+            <h3>Disease Presence</h3>
+            <p id="presenceValue">-</p>
+          </div>
+          <div class="summary-card">
+            <h3>Category</h3>
+            <p id="categoryValue">-</p>
+          </div>
+          <div class="summary-card">
+            <h3>Subtype</h3>
+            <p id="subtypeValue">-</p>
+          </div>
+          <div class="summary-card">
+            <h3>Severity</h3>
+            <p id="severityValue">-</p>
+          </div>
+        </div>
+
+        <div class="explain-grid">
+          <div class="explain-card">
+            <h3>Clinical Interpretability (SHAP)</h3>
+            <div class="shap-list" id="shapList"></div>
+          </div>
+
+          <div class="explain-card">
+            <h3>Imaging Explanation (Grad-CAM++)</h3>
+            <div class="cam-preview" id="camPreview">
+              <span>Grad-CAM++ overlay will appear here.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="report-card">
+          <div class="report-header">
+            <h3>Clinician Report</h3>
+            <div class="report-language">
+              <label for="reportLanguage">Report language</label>
+              <select id="reportLanguage" name="reportLanguage">
+                <option value="en">English</option>
+                <option value="hi">हिन्दी</option>
+                <option value="es">Español</option>
+              </select>
+            </div>
+          </div>
+          <textarea id="reportText" readonly></textarea>
+          <button class="secondary-button" id="copyReportButton">Copy Report</button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>Designed for a lightweight multimodal PCOS diagnosis web app with explainable AI and clinician-friendly reporting.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
